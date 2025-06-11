@@ -1,4 +1,4 @@
-# 🏃‍♂️  Activity‑ / Entity‑ Recognition · Streamlit Demo
+# 🏃‍♂️  Agentic Activity Recognition · Streamlit Demo App
 
 A self‑contained Streamlit app that lets you:
 
@@ -20,14 +20,10 @@ A self‑contained Streamlit app that lets you:
 4. [Configuration](#4-configuration)
 5. [Running the App](#5-running-the-app)
 6. [Using the App](#6-using-the-app)
-7. [Extending the Demo](#7-extending-the-demo)
-8. [Troubleshooting](#8-troubleshooting)
-9. [FAQ](#9-faq)
-10. [Security Notes](#10-security-notes)
-11. [Contributing](#11-contributing)
-12. [Roadmap](#12-roadmap)
-13. [License](#13-license)
-14. [Contact](#14-contact)
+7. [Troubleshooting](#8-troubleshooting)
+8. [FAQ](#9-faq)
+9. [Contributing](#11-contributing)
+10. [Contact](#14-contact)
 
 ---
 
