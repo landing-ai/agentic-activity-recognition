@@ -1,10 +1,3 @@
-````markdown
-<!--
-  README for Activity‑/Entity‑Recognition Streamlit Demo
-  Maintainers: @your‑github‑handle
-  Last updated: 2025‑06‑11
--->
-
 # 🏃‍♂️  Activity‑ / Entity‑ Recognition · Streamlit Demo
 
 A self‑contained Streamlit app that lets you:
@@ -20,8 +13,8 @@ A self‑contained Streamlit app that lets you:
 
 ---
 
-## 0. Table of Contents
-1. [Architecture](#1-architecture)
+## Table of Contents
+1. [High Level Overview](#1-architecture)
 2. [Prerequisites](#2-prerequisites)
 3. [Installation (Two Options)](#3-installation)
 4. [Configuration](#4-configuration)
@@ -38,7 +31,7 @@ A self‑contained Streamlit app that lets you:
 
 ---
 
-## 1. Architecture <a id="1-architecture"></a>
+## 1. High Level Application Overview <a id="1-architecture"></a>
 
 ```text
 ┌────────────────┐        HTTPS POST            ┌──────────────────────────┐
@@ -54,7 +47,7 @@ A self‑contained Streamlit app that lets you:
 ````
 
 *All computer‑vision heavy lifting—decoding, frame sampling, multimodal reasoning—
-occurs on Landing AI’s side. You only send bytes + prompts and receive JSON.*
+occurs behind the scenes for you on Landing AI server side. You only need to take care of sending bytes + prompts and you receive the JSON.*
 
 ---
 
@@ -140,44 +133,7 @@ Navigate to **[http://localhost:8501](http://localhost:8501)**. The app autorefr
 
 ---
 
-## 7. Extending the Demo <a id="7-extending-the-demo"></a>
-
-### 7.1 Real‑Time Scoreboard Overlay (Tennis Example)
-
-> **File:** `examples/scoreboard_overlay.py` (included in repo)
-> **Why:** Proves low‑latency streaming without embedding storage.
-
-1. **Run a local RTSP camera** or use `ffmpeg` to play an existing clip as RTSP:
-
-   ```bash
-   ffmpeg -re -i tennis.mp4 -c copy -f rtsp rtsp://localhost:8554/live
-   ```
-2. In **Streamlit**, choose **Live Stream** and paste `rtsp://localhost:8554/live`.
-3. Prompt:
-
-   ```
-   ball crosses net; ace serve; double fault
-   ```
-4. The helper script listens to `st.session_state.results` websocket, counts `label`
-   occurrences, and draws an SVG overlay on top of the video feed.
-
-### 7.2 Batch Processing
-
-For hour‑long CCTV footage:
-
-```python
-from glob import glob
-from utils import upload_in_chunks
-
-for vid in glob("night_shift/*.mp4"):
-    for chunk_path in upload_in_chunks(vid, chunk_len=60):
-        events = process_video(chunk_path, prompt, True, "medium")
-        save(events)          # your persistence layer
-```
-
----
-
-## 8. Troubleshooting <a id="8-troubleshooting"></a>
+## 7. Troubleshooting <a id="8-troubleshooting"></a>
 
 | Symptom                     | Likely Cause                             | Fix                                                                |
 | --------------------------- | ---------------------------------------- | ------------------------------------------------------------------ |
@@ -189,7 +145,7 @@ for vid in glob("night_shift/*.mp4"):
 
 ---
 
-## 9. FAQ <a id="9-faq"></a>
+## 8. FAQ <a id="9-faq"></a>
 
 1. **Does this store video on Landing AI’s servers?**
    Clips are retained only long enough for inference; no long‑term storage.
@@ -205,15 +161,7 @@ for vid in glob("night_shift/*.mp4"):
 
 ---
 
-## 10. Security Notes <a id="10-security-notes"></a>
-
-* Rotate `VA_KEY` at least every 90 days.
-* Prefer a short‑lived token wrapper when deploying in CI/CD.
-* Use HTTPS everywhere; avoid proxying through mixed‑content paths.
-
----
-
-## 11. Contributing <a id="11-contributing"></a>
+## 9. Contributing <a id="11-contributing"></a>
 
 ```text
 Fork ➜ Feature Branch ➜ PR ➜ Code Review ➜ Merge
@@ -222,26 +170,10 @@ Fork ➜ Feature Branch ➜ PR ➜ Code Review ➜ Merge
 * Run `pre-commit install` to auto‑format with black + isort.
 * Add unit tests in `tests/` for new utility functions.
 
----
-
-## 12. Roadmap <a id="12-roadmap"></a>
-
-* [ ] Drag‑&‑drop ROI to limit detection to zones.
-* [ ] Built‑in WebRTC server for truly live ingestion.
-* [ ] Dark‑mode and mobile‑responsive UI.
 
 ---
 
-## 13. License <a id="13-license"></a>
-
-```text
-MIT License – see LICENSE file.  
-Landing AI logo and name are trademarks; used with permission.
-```
-
----
-
-## 14. Contact <a id="14-contact"></a>
+## 10. Contact <a id="14-contact"></a>
 
 | Channel       | Handle / URL                                                                                                 |
 | ------------- | ------------------------------------------------------------------------------------------------------------ |
